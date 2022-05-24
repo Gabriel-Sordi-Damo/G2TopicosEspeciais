@@ -12,7 +12,7 @@ Prof. Marcos R. Santos
 - Cadastre-se (email e senha)
 - Menu (mapa próximo da localização do usuário)
 - Menu - Opções - Lançamento de Desaparecidos - Edição  e Exclusão
-(nome tutor, forma de conatto, nome do pet - descrição do pet - encontrado (true||false) ,
+(nome tutor, forma de contato, nome do pet - descrição do pet - encontrado (true||false) ,
 localização (endereço completo), data e hora, *foto)
 - Sobre - Dados do Desenvolvedor
 
