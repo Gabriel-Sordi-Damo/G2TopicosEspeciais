@@ -1,21 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList } from 'react-native';
 import * as petService from "../services/PetService"
-
+import Registro from '../components/Registro';
 export default function CadastroPet(props) {
 
     const [form, setForm] = useState({})
     const { navigation } = props
+    const [pets, setPets] = useState([])
+
+    const buscarPets = async () => {
+        try {
+            let dados = await petService.getPets()
+            console.log(dados)
+            setPets(dados)
+        } catch (error) {
+
+        }
+    }
+
+
+    useLayoutEffect(() => {
+        buscarPets()
+    }, [])
+
 
     const efetuarCadastro = async () => {
-        try {
-            let retorno = await petService.createPet(form)
-            Alert.alert("Dados Registrados com Sucesso")
-            setForm({})
-            navigation.navigate("Menu")
-        } catch (error) {
-            Alert.alert("Erro ao registrar", error)
+        if (form.nome_tutor && form.nome_pet && form.descricao && form.endereco && form.contato) {
+            try {
+                await petService.createPet(form)
+                Alert.alert("Dados Registrados com Sucesso")
+                setForm({})
+                navigation.navigate("Menu", { atualizar: true })
+            } catch (error) {
+                Alert.alert("Erro ao registrar", "Verifique os campos, em especial o endereço!")
+            }
+        } else {
+            Alert.alert("Campos não preenchidos corretamente!")
         }
     }
 
@@ -71,6 +92,12 @@ export default function CadastroPet(props) {
                 </View>
             </View>
             <StatusBar style="auto" />
+
+            <FlatList
+                data={pets}
+                renderItem={({ item }) => <Registro dados={item} buscarPets={buscarPets} navigation={navigation} />}
+                keyExtractor={item => item.key}
+            />
         </View >
     );
 }
@@ -94,7 +121,7 @@ const styles = StyleSheet.create({
     },
     coluna: {
         flex: 1,
+        flexDirection: "row",
         marginLeft: 5
     }
-
 });

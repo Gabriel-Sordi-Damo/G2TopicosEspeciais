@@ -1,0 +1,79 @@
+import { StyleSheet, Text, View, Button, Alert } from 'react-native'
+import React from 'react'
+import * as petService from '../services/PetService'
+export default function Registro(props) {
+
+    const data = props.dados
+    console.log(props)
+
+    const excluirPet = () => {
+
+        try {
+            Alert.alert("Deseja Excluir:", "Esses dados serão apagados para sempre!", [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                {
+                    text: "OK", onPress: async () => {
+                        await petService.deletePet(data.key)
+                        Alert.alert("Dados Excluídos com Sucesso")
+                        props.navigation.navigate("Menu", { atualizar: true })
+                    }
+                }
+            ])
+
+
+        } catch (error) {
+
+        }
+    }
+
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.linha}>
+                <View style={styles.coluna}>
+                    <Text style={styles.campo}>Nome do Pet:</Text>
+                    <Text>{data.nome_pet}</Text>
+                </View>
+            </View>
+            <View style={styles.linha}>
+                <View style={styles.coluna}>
+                    <Text style={styles.campo}>Endereço:</Text>
+                    <Text>{data.endereco}</Text>
+                </View>
+            </View>
+            <View style={styles.linha}>
+                <View style={styles.coluna}>
+                </View>
+                <View style={styles.coluna}>
+                </View>
+                <View style={styles.coluna}>
+                    <Button title='Excluir' color={'red'} onPress={excluirPet} />
+                </View>
+            </View>
+        </View >
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: "gray",
+        margin: 5
+    },
+    linha: {
+        flexDirection: "row"
+    },
+    coluna: {
+        flex: 1,
+        flexDirection: "row"
+    },
+    campo: {
+        width: 90
+    }
+
+})

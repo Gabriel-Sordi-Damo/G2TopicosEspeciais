@@ -45,7 +45,12 @@ export default function App() {
           name="CadastroPet"
           component={CadastroPet}
           options={
-            { title: "Registro de Pets Desaparecidos" }
+            {
+              title: "Registro de Pets Desaparecidos",
+              headerTitleStyle: {
+                fontSize: 15
+              }
+            }
           }
         />
       </Stack.Navigator>
