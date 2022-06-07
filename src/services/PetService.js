@@ -1,10 +1,10 @@
 import db from "../back-end/firebaseConnect"
 
-import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore'
+import { collection, addDoc, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore'
 import { searchByAddress } from "./LocationService"
 
 
-export const createPet = (dados) => {
+export const createPet = (dados, uid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let coordenadas = await searchByAddress(dados.endereco)
@@ -12,6 +12,7 @@ export const createPet = (dados) => {
             let lng = coordenadas.lng
             dados.lat = lat
             dados.lng = lng
+            dados.uid = uid
             const docId = await addDoc(collection(db, "pets"), dados)
             resolve(docId)
         } catch (error) {
@@ -20,6 +21,27 @@ export const createPet = (dados) => {
     })
 }
 
+
+export const getPetsUid = (uid) => {
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            const colecao = collection(db, "pets")
+            const q = query(colecao, where("uid", "==", uid))
+            const querySnapshot = await getDocs(q)
+            let registros = []
+            querySnapshot.forEach((item) => {
+                let data = item.data()
+                data.key = item.id
+                registros.push(data)
+            })
+            resolve(registros)
+        } catch (error) {
+            console.log("Erro:", error)
+            reject()
+        }
+    })
+}
 
 export const getPets = () => {
 

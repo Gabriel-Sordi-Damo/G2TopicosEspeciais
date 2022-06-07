@@ -3,16 +3,19 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList } from 'react-native';
 import * as petService from "../services/PetService"
 import Registro from '../components/Registro';
+import { useDispatch, useSelector } from 'react-redux';
+
 export default function CadastroPet(props) {
 
     const [form, setForm] = useState({})
     const { navigation } = props
     const [pets, setPets] = useState([])
+    const user = useSelector(store => store.user)
 
     const buscarPets = async () => {
         try {
-            let dados = await petService.getPets()
-            console.log(dados)
+            let dados = await petService.getPetsUid(user.uid)
+            //console.log(dados)
             setPets(dados)
         } catch (error) {
 
@@ -28,7 +31,7 @@ export default function CadastroPet(props) {
     const efetuarCadastro = async () => {
         if (form.nome_tutor && form.nome_pet && form.descricao && form.endereco && form.contato) {
             try {
-                await petService.createPet(form)
+                await petService.createPet(form, user.uid)
                 Alert.alert("Dados Registrados com Sucesso")
                 setForm({})
                 navigation.navigate("Menu", { atualizar: true })
@@ -44,6 +47,7 @@ export default function CadastroPet(props) {
     return (
         <View style={styles.container}>
             <Text style={{ textAlign: "center" }}>Informe os dados o Pet desaparecido:</Text>
+            <Text style={{ textAlign: "center" }}>{user.email}</Text>
             <View style={styles.input}>
                 <TextInput
                     placeholder='Nome do Tutor'

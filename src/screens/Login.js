@@ -5,12 +5,16 @@ import * as loginService from "../services/LoginService"
 import { CheckBox } from '@rneui/themed';
 
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useSelector, useDispatch } from 'react-redux';
+import * as UserAction from '../services/actions/user.action'
+
 
 export default function Login(props) {
 
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
     const [lembreme, setLembreme] = useState(false);
+    const dispatch = useDispatch()
 
     const { navigation } = props
 
@@ -32,6 +36,8 @@ export default function Login(props) {
 
         try {
             let user = await loginService.login(email, senha)
+            dispatch(UserAction.setUser(user))
+            
             navigation.replace("Menu")
         } catch (error) {
             Alert.alert("Erro ao efetuar Loging", error)

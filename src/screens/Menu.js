@@ -4,8 +4,11 @@ import * as loginService from '../services/LoginService'
 import * as petService from '../services/PetService'
 import * as Location from "expo-location"
 import MapView, { Marker } from 'react-native-maps'
+import { useSelector } from 'react-redux'
+
 export default function Menu(props) {
 
+  const user = useSelector(store => store.user)
   const { navigation } = props
 
   const [pets, setPets] = useState([])
@@ -31,7 +34,7 @@ export default function Menu(props) {
   const buscarPets = async () => {
     try {
       let dados = await petService.getPets()
-      console.log(dados)
+      //console.log(dados)
       setPets(dados)
     } catch (error) {
 
@@ -55,7 +58,7 @@ export default function Menu(props) {
   useEffect(() => {
     myPosition()
     buscarPets()
-    console.log(props)
+    //console.log(props)
 
   }, [props])
 
@@ -64,7 +67,11 @@ export default function Menu(props) {
 
 
     navigation.setOptions({
+      title: user.email,
       headerTitleAlign: "center",
+      headerTitleStyle: {
+        fontSize: 15
+      },
       //headerLeft: () => <Button title='+' onPress={() => navigation.navigate("CadastroPet")} />,
       headerRight: () => <Button title='Logoff' onPress={logoff} />
     })
@@ -91,7 +98,7 @@ export default function Menu(props) {
               longitude: location.coords.longitude
             }
           }
-          title="Minha Posição"
+          title={user.email}
           icon={require("../../assets/my-location-icon.jpg")}
 
         />}

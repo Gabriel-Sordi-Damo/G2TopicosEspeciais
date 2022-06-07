@@ -4,29 +4,28 @@ import * as petService from '../services/PetService'
 export default function Registro(props) {
 
     const data = props.dados
-    console.log(props)
 
     const excluirPet = () => {
 
-        try {
-            Alert.alert("Deseja Excluir:", "Esses dados serão apagados para sempre!", [
-                {
-                    text: "Cancel",
-                    style: "cancel"
-                },
-                {
-                    text: "OK", onPress: async () => {
+
+        Alert.alert("Deseja Excluir:", "Esses dados serão apagados para sempre!", [
+            {
+                text: "Cancel",
+                style: "cancel"
+            },
+            {
+                text: "OK", onPress: async () => {
+                    try {
                         await petService.deletePet(data.key)
                         Alert.alert("Dados Excluídos com Sucesso")
                         props.navigation.navigate("Menu", { atualizar: true })
+                    } catch (error) {
+                        Alert.alert("Você não possui permissão para excluir esse registro!")
                     }
                 }
-            ])
+            }
+        ])
 
-
-        } catch (error) {
-
-        }
     }
 
 

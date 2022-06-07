@@ -1,7 +1,7 @@
 import Geocoder from "react-native-geocoding";
 
 //Chave específica por projeto
-Geocoder.init("AIzaSyBTyWJsc67NR8R5l6lFXP9p_syfG6NY22Y")
+Geocoder.init("AIzaSyCFk6wJ332LlmOHGdLHRaWEONNyFzFhH-Y")
 
 
 export const searchByAddress = (endereco) => {
@@ -11,7 +11,7 @@ export const searchByAddress = (endereco) => {
         Geocoder.from(endereco)
             .then(result => {
                 var location = result.results[0].geometry.location //devolve lat e lng
-                console.log(location)
+                //console.log(location)
                 resolve(location)
             })
             .catch(error => {
