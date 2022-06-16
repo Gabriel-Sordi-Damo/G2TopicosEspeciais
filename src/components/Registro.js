@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Button, Alert } from 'react-native'
 import React from 'react'
-import * as petService from '../services/PetService'
+import * as petService from '../services/HappyPlacaServices'
 export default function Registro(props) {
 
     const data = props.dados
@@ -16,7 +16,7 @@ export default function Registro(props) {
             {
                 text: "OK", onPress: async () => {
                     try {
-                        await petService.deletePet(data.key)
+                        await petService.deleteHappyPlace(data.key)
                         Alert.alert("Dados Excluídos com Sucesso")
                         props.navigation.navigate("Menu", { atualizar: true })
                     } catch (error) {

@@ -3,12 +3,12 @@ import { getFirestore } from "firebase/firestore"
 
 //Personalize com as suas chaves de conexão
 const firebaseConfig = {
-    apiKey: "AIzaSyA1VNGWs9KhLDatTRj-mYwlpH4OmWGHPc8",
-    authDomain: "catfinder-57d59.firebaseapp.com",
-    projectId: "catfinder-57d59",
-    storageBucket: "catfinder-57d59.appspot.com",
-    messagingSenderId: "708287731668",
-    appId: "1:708287731668:web:7aa640653b258b5bd02841"
+    apiKey: "AIzaSyB6njzvtZipjwSbuGTOoTR9qClGeiaE9Jw",
+    authDomain: "g2topicosespeciais-59f73.firebaseapp.com",
+    projectId: "g2topicosespeciais-59f73",
+    storageBucket: "g2topicosespeciais-59f73.appspot.com",
+    messagingSenderId: "947250928853",
+    appId: "1:947250928853:web:c795aea961ecdc307b565c"
 };
 
 const app = initializeApp(firebaseConfig)

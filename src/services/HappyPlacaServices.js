@@ -4,16 +4,18 @@ import { collection, addDoc, getDocs, deleteDoc, doc, query, where } from 'fireb
 import { searchByAddress } from "./LocationService"
 
 
-export const createPet = (dados, uid) => {
+export const createHappyPlace = (data, uid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let coordenadas = await searchByAddress(dados.endereco)
+            console.log("dados", data)
+            let coordenadas = await searchByAddress(data.address)
             let lat = coordenadas.lat
             let lng = coordenadas.lng
-            dados.lat = lat
-            dados.lng = lng
-            dados.uid = uid
-            const docId = await addDoc(collection(db, "pets"), dados)
+            data.lat = lat
+            data.lng = lng
+            data.uid = uid
+            console.log("cooodreadads", coordenadas)
+            const docId = await addDoc(collection(db, "locations"), data)
             resolve(docId)
         } catch (error) {
             reject(error)
@@ -22,11 +24,11 @@ export const createPet = (dados, uid) => {
 }
 
 
-export const getPetsUid = (uid) => {
+export const getHappyPlaceUid = (uid) => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            const colecao = collection(db, "pets")
+            const colecao = collection(db, "locations")
             const q = query(colecao, where("uid", "==", uid))
             const querySnapshot = await getDocs(q)
             let registros = []
@@ -43,11 +45,11 @@ export const getPetsUid = (uid) => {
     })
 }
 
-export const getPets = () => {
+export const getHappyPlaces = () => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            const querySnapshot = await getDocs(collection(db, "pets"))
+            const querySnapshot = await getDocs(collection(db, "locations"))
             let registros = []
             querySnapshot.forEach((item) => {
                 let data = item.data()
@@ -63,12 +65,12 @@ export const getPets = () => {
 }
 
 
-export const deletePet = (key) => {
+export const deleteHappyPlace = (key) => {
     console.log("Delete", key)
     return new Promise(async (resolve, reject) => {
 
         try {
-            await deleteDoc(doc(db, "pets", key))
+            await deleteDoc(doc(db, "locations", key))
             resolve()
         } catch (error) {
             console.log(error)

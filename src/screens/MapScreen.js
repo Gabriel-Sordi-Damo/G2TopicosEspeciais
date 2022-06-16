@@ -1,17 +1,20 @@
-import { StyleSheet, Text, View, Button, Alert, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Button, Alert, Dimensions, AllertButton } from 'react-native'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import * as loginService from '../services/LoginService'
-import * as petService from '../services/PetService'
+import * as happlyPlaceService from '../services/HappyPlacaServices'
+import * as favoritePlaceServices from '../services/FavoritePlacesServices'
 import * as Location from "expo-location"
 import MapView, { Marker } from 'react-native-maps'
 import { useSelector } from 'react-redux'
+import Screens from './Screens'
 
-export default function Menu(props) {
+
+export default function MapScreen(props) {
 
   const user = useSelector(store => store.user)
   const { navigation } = props
 
-  const [pets, setPets] = useState([])
+  const [happyPlaces, setHappyPlaces] = useState([])
   const [location, setLocation] = useState({
     coords: {
       latitude: -28.2857919,
@@ -31,15 +34,21 @@ export default function Menu(props) {
 
   }
 
-  const buscarPets = async () => {
+  const searchHappyPlaces = async () => {
     try {
-      let dados = await petService.getPets()
-      //console.log(dados)
-      setPets(dados)
+      let data = await happlyPlaceService.getHappyPlaces()
+      setHappyPlaces(data)
     } catch (error) {
 
     }
   }
+
+  useEffect(() => {
+    myPosition()
+    searchHappyPlaces()
+    //console.log(props)
+
+  }, [props])
 
 
 
@@ -47,20 +56,13 @@ export default function Menu(props) {
 
     try {
       await loginService.logoff()
-      navigation.replace("Login")
+      navigation.replace(Screens.LOGIN)
     } catch (error) {
       Alert.alert(error)
     }
 
   }
 
-
-  useEffect(() => {
-    myPosition()
-    buscarPets()
-    //console.log(props)
-
-  }, [props])
 
 
   useLayoutEffect(() => {
@@ -72,7 +74,7 @@ export default function Menu(props) {
       headerTitleStyle: {
         fontSize: 15
       },
-      //headerLeft: () => <Button title='+' onPress={() => navigation.navigate("CadastroPet")} />,
+
       headerRight: () => <Button title='Logoff' onPress={logoff} />
     })
 
@@ -103,17 +105,20 @@ export default function Menu(props) {
 
         />}
 
-        {pets.map((pet, key) => <Marker
+        {happyPlaces.map((happyPlace, key) => <Marker
 
           key={key}
           coordinate={{
-            latitude: pet.lat,
-            longitude: pet.lng
+            latitude: happyPlace.lat,
+            longitude: happyPlace.lng
           }}
-          title={pet.nome_pet}
+          title={happyPlace.address}
           icon={require("../../assets/pet-position.png")}
-          onPress={() => Alert.alert(pet.nome_pet,
-            `Tutor: ${pet.nome_tutor}\nDescrição: ${pet.descricao}\nEndereço: ${pet.endereco}\nContato: ${pet.contato} `)}
+          onPress={() => Alert.alert(happyPlace.address,
+            `Descrição: ${happyPlace.description}\n`,
+            [{ text: "OK", onPress: () => "Continue" },
+            { text: "Make Favorite", onPress: () => favoritePlaceServices.createFavoriteHappyPlace(happyPlace) }])
+          }
 
         />)}
 
@@ -125,7 +130,7 @@ export default function Menu(props) {
         paddingRight: 10
 
       }}>
-        <Button title='+ Pet' onPress={() => navigation.navigate("CadastroPet")} />
+        <Button title='+ Lugar Feliz' onPress={() => navigation.navigate(Screens.REGISTER_HAPPY_PLACE)} />
       </View>
 
 

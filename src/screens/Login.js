@@ -3,42 +3,59 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import * as loginService from "../services/LoginService"
 import { CheckBox } from '@rneui/themed';
-
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useSelector, useDispatch } from 'react-redux';
 import * as UserAction from '../services/actions/user.action'
+
+import Screens from './Screens';
 
 
 export default function Login(props) {
 
     const [email, setEmail] = useState("")
-    const [senha, setSenha] = useState("")
-    const [lembreme, setLembreme] = useState(false);
+    const [password, setPassword] = useState("")
+    const [rememberMe, setRememberme] = useState(false);
     const dispatch = useDispatch()
 
     const { navigation } = props
 
-    const verificarLembreme = async () => {
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Button onPress={() => navigation.pop()} title="Voltar" />
+            ),
+        })
+    }, [])
+
+    const verifyRememberMe = async () => {
         let emailMemory = await AsyncStorage.getItem("email")
-        let senhaMemory = await AsyncStorage.getItem("senha")
+        let passwordMemory = await AsyncStorage.getItem("password")
         if (emailMemory) {
             setEmail(emailMemory)
-            setSenha(senhaMemory)
-            setLembreme(true)
+            setPassword(passwordMemory)
+            setRememberme(true)
         }
     }
 
     useLayoutEffect(() => {
-        verificarLembreme()
+        navigation.setOptions({
+            headerRight: () => (
+                []
+            ),
+        })
+    }, [])
+
+    useLayoutEffect(() => {
+        verifyRememberMe()
     }, [])
 
     const efetuarLogin = async () => {
 
         try {
-            let user = await loginService.login(email, senha)
+            let user = await loginService.login(email, password)
             dispatch(UserAction.setUser(user))
-            
-            navigation.replace("Menu")
+
+            navigation.replace(Screens.MAP_SCREEN)
         } catch (error) {
             Alert.alert("Erro ao efetuar Loging", error)
         }
@@ -46,15 +63,15 @@ export default function Login(props) {
 
 
     const lembrar = async () => {
-        setLembreme(!lembreme)
+        setRememberme(!rememberMe)
 
-        if (!lembreme) {
+        if (!rememberMe) {
             await AsyncStorage.setItem('email', email)
-            await AsyncStorage.setItem("senha", senha)
+            await AsyncStorage.setItem("password", password)
 
         } else {
             await AsyncStorage.removeItem("email")
-            await AsyncStorage.removeItem("senha")
+            await AsyncStorage.removeItem("password")
         }
     }
 
@@ -73,18 +90,18 @@ export default function Login(props) {
             </View>
             <View style={styles.input}>
                 <TextInput
-                    placeholder='senha'
+                    placeholder='password'
                     autoCapitalize='none'
                     secureTextEntry
-                    value={senha}
-                    onChangeText={(e) => setSenha(e)}
+                    value={password}
+                    onChangeText={(e) => setPassword(e)}
                 />
             </View>
             <View>
                 <CheckBox
                     center
                     title="Lembre-me"
-                    checked={lembreme}
+                    checked={rememberMe}
                     onPress={lembrar}
                 />
             </View>
@@ -98,7 +115,7 @@ export default function Login(props) {
                 <View style={styles.coluna}>
                     <Button
                         title='Registre-se'
-                        onPress={() => navigation.navigate("CadastroUser")}
+                        onPress={() => navigation.navigate(Screens.REGISTER_USER)}
                     />
 
                 </View>
@@ -128,6 +145,12 @@ const styles = StyleSheet.create({
     coluna: {
         flex: 1,
         marginLeft: 5
-    }
+    },
+    bottom: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+    },
 
 });

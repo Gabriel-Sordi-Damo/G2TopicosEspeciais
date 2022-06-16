@@ -2,19 +2,26 @@ import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import * as loginService from "../services/LoginService"
+import Screens from './Screens';
 
-export default function CadastroUser(props) {
+
+
+
+
+
+
+export default function RegisterUser(props) {
 
     const [email, setEmail] = useState("")
-    const [senha, setSenha] = useState("")
+    const [password, setPassword] = useState("")
     const { navigation } = props
 
-    const efetuarCadastro = async () => {
+    const completeRegistration = async () => {
 
         try {
-            let retorno = await loginService.createUser(email, senha)
-            Alert.alert(retorno)
-            navigation.navigate("Login")
+            let answer = await loginService.createUser(email, password)
+            Alert.alert(answer)
+            navigation.navigate(Screens.LOGIN)
         } catch (error) {
             Alert.alert("Erro ao registrar usuário", error)
         }
@@ -39,15 +46,15 @@ export default function CadastroUser(props) {
                     placeholder='senha'
                     autoCapitalize='none'
                     secureTextEntry
-                    value={senha}
-                    onChangeText={(e) => setSenha(e)}
+                    value={password}
+                    onChangeText={(e) => setPassword(e)}
                 />
             </View>
             <View style={styles.linha}>
                 <View style={styles.coluna}>
                     <Button
                         title='Registrar Usuário'
-                        onPress={efetuarCadastro}
+                        onPress={completeRegistration}
                     />
                 </View>
             </View>
