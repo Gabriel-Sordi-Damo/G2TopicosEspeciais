@@ -7,10 +7,11 @@ import MapScreen from './src/screens/MapScreen';
 import RegisterUser from './src/screens/UserRegistration';
 import RegisterHappyPlace from './src/screens/RegisterHappyPlace';
 import FavoritePlaces from './src/screens/FavoritePlaces';
-import AppInfo from './src/screens/AppInfo';
 import Screens from './src/screens/Screens';
 import SoftwareInfo from './src/screens/SoftwareInfo';
+import About from './src/screens/About';
 import MainMenu from './src/screens/MainMenu';
+import FAQ from './src/screens/FAQ'
 import { Provider as StoreProvider } from 'react-redux';
 import { LogBox } from 'react-native';
 import store from './src/services/store'
@@ -36,10 +37,17 @@ export default function App() {
             }
           />
           <Stack.Screen
-            name={Screens.APP_INFO}
-            component={AppInfo}
+            name={Screens.FAQ}
+            component={FAQ}
             options={
-              { title: "Informações" }
+              { title: "FAQ" }
+            }
+          />
+          <Stack.Screen
+            name={Screens.ABOUT}
+            component={About}
+            options={
+              { title: "Sobre" }
             }
           />
           <Stack.Screen

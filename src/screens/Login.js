@@ -22,7 +22,7 @@ export default function Login(props) {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <Button onPress={() => navigation.pop()} title="Voltar" />
+                <Button onPress={() => navigation.navigate(Screens.ABOUT)} title="Sobre" />
             ),
         })
     }, [])

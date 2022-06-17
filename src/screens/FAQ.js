@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 
 
 
-export default function AppInfo(props) {
+export default function FAQ(props) {
 
     const { navigation } = props
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <Button onPress={() => navigation.pop()} title="Voltar" />
+                <Button onPress={() => navigation.navigate(Screens.ABOUT)} title="Sobre" />
             ),
         })
     }, [])
@@ -18,15 +18,12 @@ export default function AppInfo(props) {
     return (
         <View style={styles.container}>
             <Text style={styles.linha}>
-                Integrantes: Gabriel Sordi Damo, Pedro Marcheti
+                Ao fazer login no app é possível adicinar um local que te deixa feliz no mapa,
+                junto de uma descrição do porque disso.
             </Text>
-            <Text style={styles.linha}>
-                App feito com Expo. Expo foi escolhido devido as facilidades de uso,
-                levando-se em consideração principalmente os dipositivos móveis dos desenvolvedorers
-                que não são Android.
-            </Text>
-            <Text style={styles.linha}>
-                App Info
+            <Text>
+                Também é possível favoritar lugares que te deixam feliz que foram adicinados por
+                você ou outras pessoas.
             </Text>
 
         </View >

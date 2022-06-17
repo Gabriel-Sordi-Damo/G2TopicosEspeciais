@@ -22,6 +22,8 @@ export default function MapScreen(props) {
     }
   })
 
+
+
   const myPosition = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {

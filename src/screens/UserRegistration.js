@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import * as loginService from "../services/LoginService"
@@ -15,6 +15,14 @@ export default function RegisterUser(props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const { navigation } = props
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Button onPress={() => navigation.navigate(Screens.ABOUT)} title="Sobre" />
+            ),
+        })
+    }, [])
 
     const completeRegistration = async () => {
 

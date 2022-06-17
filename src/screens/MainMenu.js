@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { StyleSheet, View, FlatList, Button } from 'react-native';
 import Screens from './Screens';
 
@@ -7,6 +7,13 @@ export default function MainMenu(props) {
 
     const { navigation } = props
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Button onPress={() => navigation.navigate(Screens.ABOUT)} title="Sobre" />
+            ),
+        })
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -21,8 +28,8 @@ export default function MainMenu(props) {
                         pageName: "Informações do Software"
                     },
                     {
-                        navigateTo: Screens.APP_INFO,
-                        pageName: "Informaçoes do App"
+                        navigateTo: Screens.FAQ,
+                        pageName: "FAQ"
                     },
                 ]}
                 renderItem={({ item }) => <Button

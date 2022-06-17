@@ -14,6 +14,7 @@ export default function FavoritePlaces(props) {
 
     const [happyPlaces, setHappyPlaces] = useState([])
 
+
     const searchHappyPlaces = async () => {
         console.log(user.uid)
         try {

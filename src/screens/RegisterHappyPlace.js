@@ -1,5 +1,7 @@
 import React, { useState, useLayoutEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
+import * as loginService from '../services/LoginService'
+
 import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList } from 'react-native';
 import * as happlyPlaceService from "../services/HappyPlacaServices"
 import Registro from '../components/DeleteHappyPlace';
@@ -15,6 +17,33 @@ export default function RegisterHappyPlace(props) {
     const { navigation } = props
     const [happyPlaces, setHappyPlaces] = useState([])
     const user = useSelector(store => store.user)
+
+    const logoff = async () => {
+
+        try {
+            await loginService.logoff()
+            navigation.replace(Screens.LOGIN)
+        } catch (error) {
+            Alert.alert(error)
+        }
+
+    }
+
+    useLayoutEffect(() => {
+
+
+        navigation.setOptions({
+            title: user.email,
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+                fontSize: 15
+            },
+
+            headerRight: () => <Button title='Logoff' onPress={logoff} />
+        })
+
+    }, [])
+
 
     const findHappyPlaces = async () => {
         try {
