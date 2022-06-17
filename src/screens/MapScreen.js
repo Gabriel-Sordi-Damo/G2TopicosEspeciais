@@ -117,7 +117,12 @@ export default function MapScreen(props) {
           onPress={() => Alert.alert(happyPlace.address,
             `Descrição: ${happyPlace.description}\n`,
             [{ text: "OK", onPress: () => "Continue" },
-            { text: "Make Favorite", onPress: () => favoritePlaceServices.createFavoriteHappyPlace(happyPlace) }])
+            {
+              text: "Make Favorite", onPress: function () {
+                happyPlace.uid = user.uid
+                favoritePlaceServices.createFavoriteHappyPlace(happyPlace)
+              }
+            }])
           }
 
         />)}

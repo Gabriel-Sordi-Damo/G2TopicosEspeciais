@@ -6,6 +6,7 @@ import Login from './src/screens/Login';
 import MapScreen from './src/screens/MapScreen';
 import RegisterUser from './src/screens/UserRegistration';
 import RegisterHappyPlace from './src/screens/RegisterHappyPlace';
+import FavoritePlaces from './src/screens/FavoritePlaces';
 import AppInfo from './src/screens/AppInfo';
 import Screens from './src/screens/Screens';
 import SoftwareInfo from './src/screens/SoftwareInfo';
@@ -67,6 +68,13 @@ export default function App() {
             component={RegisterUser}
             options={
               { title: "Registro de Usuários" }
+            }
+          />
+          <Stack.Screen
+            name={Screens.FAVORITE_PLACES}
+            component={FavoritePlaces}
+            options={
+              { title: "Lugares Favoritos" }
             }
           />
           <Stack.Screen

@@ -1,6 +1,9 @@
 import { StyleSheet, Text, View, Button, Alert } from 'react-native'
 import React from 'react'
 import * as petService from '../services/HappyPlacaServices'
+
+import Screens from '../screens/Screens'
+
 export default function Registro(props) {
 
     const data = props.dados
@@ -18,7 +21,7 @@ export default function Registro(props) {
                     try {
                         await petService.deleteHappyPlace(data.key)
                         Alert.alert("Dados Excluídos com Sucesso")
-                        props.navigation.navigate("Menu", { atualizar: true })
+                        props.navigation.navigate(Screens.MAP_SCREEN, { atualizar: true })
                     } catch (error) {
                         Alert.alert("Você não possui permissão para excluir esse registro!")
                     }
@@ -34,13 +37,13 @@ export default function Registro(props) {
             <View style={styles.linha}>
                 <View style={styles.coluna}>
                     <Text style={styles.campo}>Nome do Pet:</Text>
-                    <Text>{data.nome_pet}</Text>
+                    <Text>{data.address}</Text>
                 </View>
             </View>
             <View style={styles.linha}>
                 <View style={styles.coluna}>
                     <Text style={styles.campo}>Endereço:</Text>
-                    <Text>{data.endereco}</Text>
+                    <Text>{data.description}</Text>
                 </View>
             </View>
             <View style={styles.linha}>

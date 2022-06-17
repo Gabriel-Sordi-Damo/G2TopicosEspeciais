@@ -55,7 +55,7 @@ export default function Login(props) {
             let user = await loginService.login(email, password)
             dispatch(UserAction.setUser(user))
 
-            navigation.replace(Screens.MAP_SCREEN)
+            navigation.replace(Screens.FAVORITE_PLACES)
         } catch (error) {
             Alert.alert("Erro ao efetuar Loging", error)
         }

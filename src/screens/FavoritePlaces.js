@@ -1,10 +1,8 @@
 import { StyleSheet, Text, View, Button, Alert, Dimensions, AllertButton } from 'react-native'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import * as loginService from '../services/LoginService'
-import * as happlyPlaceService from '../services/HappyPlacaServices'
-import * as favoritePlaceServices from '../services/FavoritePlacesServices'
-import * as Location from "expo-location"
-import MapView, { Marker } from 'react-native-maps'
+import * as favoritePlacesServices from '../services/FavoritePlacesServices'
+import FavoritePlace from '../components/FavoritePlace'
 import { useSelector } from 'react-redux'
 import Screens from './Screens'
 
@@ -15,16 +13,13 @@ export default function FavoritePlaces(props) {
     const { navigation } = props
 
     const [happyPlaces, setHappyPlaces] = useState([])
-    const [location, setLocation] = useState({
-        coords: {
-            latitude: -28.2857919,
-            longitude: -52.7888171,
-        }
-    })
 
     const searchHappyPlaces = async () => {
+        console.log(user.uid)
         try {
-            let data = await happlyPlaceService.getFavoritePlaceUid(user.uid)
+            let data = await favoritePlacesServices.getFavoritePlaceUid(user.uid)
+            console.log("favoritePlaces")
+            console.log(data)
             setHappyPlaces(data)
         } catch (error) {
 
@@ -62,27 +57,31 @@ export default function FavoritePlaces(props) {
 
     }, [])
 
-
+    function getFavoritePlacesList() {
+        let list = []
+        for (let favoritePlace of happyPlaces)
+            list.push(FavoritePlace(favoritePlace))
+        return list
+    }
     return (
         <View>
-            <View style={{
-                position: "absolute",
-                top: "80%",
-                alignSelf: "flex-end",
-                paddingRight: 10
 
-            }}>
-                <Button title='+ Lugar Feliz' onPress={() => navigation.navigate(Screens.REGISTER_HAPPY_PLACE)} />
+            <View style={styles.fullDimensions}>
+
+                <Button title={'Mapa de lugares felizes'} onPress={() => navigation.navigate(Screens.MAP_SCREEN)} />
+                <Button title={'Atualizar'} onPress={async () => await searchHappyPlaces()} />
+                <Text>
+                    Lugares Favoritos:
+                </Text>
+                {getFavoritePlacesList()}
             </View>
-
-
         </View>
     )
 }
 
 const styles = StyleSheet.create({
 
-    map: {
+    fullDimensions: {
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height
     }

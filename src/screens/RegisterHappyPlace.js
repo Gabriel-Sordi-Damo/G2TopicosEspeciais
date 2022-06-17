@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList } from 'react-native';
 import * as happlyPlaceService from "../services/HappyPlacaServices"
-import Registro from '../components/Registro';
+import Registro from '../components/DeleteHappyPlace';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -80,7 +80,7 @@ export default function RegisterHappyPlace(props) {
 
             <FlatList
                 data={happyPlaces}
-                renderItem={({ item }) => <Registro dados={item} findHappyPlaces={findHappyPlaces} navigation={navigation} />}
+                renderItem={({ item }) => <Registro dados={item} navigation={navigation} />}
                 keyExtractor={item => item.key}
             />
         </View >

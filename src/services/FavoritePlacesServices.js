@@ -1,7 +1,6 @@
 import db from "../back-end/firebaseConnect"
 
 import { collection, addDoc, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore'
-import { searchByAddress } from "./LocationService"
 
 
 export const createFavoriteHappyPlace = (data) => {
@@ -36,26 +35,6 @@ export const getFavoritePlaceUid = (uid) => {
         }
     })
 }
-
-export const getFavoritePlaces = () => {
-
-    return new Promise(async (resolve, reject) => {
-        try {
-            const querySnapshot = await getDocs(collection(db, "favorites"))
-            let registros = []
-            querySnapshot.forEach((item) => {
-                let data = item.data()
-                data.key = item.id
-                registros.push(data)
-            })
-            resolve(registros)
-        } catch (error) {
-            console.log("Erro:", error)
-            reject()
-        }
-    })
-}
-
 
 export const deleteFavoritePlace = (key) => {
     console.log("Delete", key)
