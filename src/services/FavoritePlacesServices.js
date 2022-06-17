@@ -1,4 +1,4 @@
-import db from "../back-end/firebaseConnect"
+import db from "../firebase/firebaseConnect"
 
 import { collection, addDoc, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore'
 

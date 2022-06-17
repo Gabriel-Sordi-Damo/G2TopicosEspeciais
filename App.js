@@ -3,10 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from './src/screens/Login';
-import MapScreen from './src/screens/MapScreen';
+import HapyPlaces from './src/screens/User/HapyPlaces';
 import RegisterUser from './src/screens/UserRegistration';
-import RegisterHappyPlace from './src/screens/RegisterHappyPlace';
-import FavoritePlaces from './src/screens/FavoritePlaces';
+import RegisterHappyPlace from './src/screens/User/RegisterHappyPlace';
+import FavoritePlaces from './src/screens/User/FavoritePlaces';
 import Screens from './src/screens/Screens';
 import SoftwareInfo from './src/screens/SoftwareInfo';
 import About from './src/screens/About';
@@ -65,10 +65,10 @@ export default function App() {
             }
           />
           <Stack.Screen
-            name={Screens.MAP_SCREEN}
-            component={MapScreen}
+            name={Screens.HAPY_PLACES}
+            component={HapyPlaces}
             options={
-              { title: "Lugares Felizes" }
+              { title: "Mapa dos Lugares Felizes" }
             }
           />
           <Stack.Screen

@@ -1,11 +1,12 @@
 import React, { useState, useLayoutEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import * as loginService from '../services/LoginService'
+import * as loginService from '../../services/LoginService'
 
 import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList } from 'react-native';
-import * as happlyPlaceService from "../services/HappyPlacaServices"
-import Registro from '../components/DeleteHappyPlace';
+import * as happlyPlaceService from "../../services/HappyPlacaServices"
+import HappyPlaceDeleteComponent from '../../components/HappyPlaceDeleteComponent';
 import { useDispatch, useSelector } from 'react-redux';
+import Screens from '../Screens';
 
 
 
@@ -67,7 +68,7 @@ export default function RegisterHappyPlace(props) {
                 await happlyPlaceService.createHappyPlace(form, user.uid)
                 Alert.alert("Dados Registrados com Sucesso")
                 setForm({})
-                navigation.navigate("Menu", { atualizar: true })
+                navigation.navigate(Screens.HAPY_PLACES, { update: true })
             } catch (error) {
                 Alert.alert("Erro ao registrar", "Verifique os campos, em especial o endereço!")
             }
@@ -109,7 +110,7 @@ export default function RegisterHappyPlace(props) {
 
             <FlatList
                 data={happyPlaces}
-                renderItem={({ item }) => <Registro dados={item} navigation={navigation} />}
+                renderItem={({ item }) => <HappyPlaceDeleteComponent dados={item} navigation={navigation} />}
                 keyExtractor={item => item.key}
             />
         </View >

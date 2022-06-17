@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, Button, Alert, Dimensions, AllertButton } from 'react-native'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
-import * as loginService from '../services/LoginService'
-import * as favoritePlacesServices from '../services/FavoritePlacesServices'
-import FavoritePlace from '../components/FavoritePlace'
+import * as loginService from '../../services/LoginService'
+import * as favoritePlacesServices from '../../services/FavoritePlacesServices'
+import FavoritePlace from '../../components/FavoritePlaceComponent'
 import { useSelector } from 'react-redux'
-import Screens from './Screens'
+import Screens from '../Screens'
 
 
 export default function FavoritePlaces(props) {
@@ -69,7 +69,7 @@ export default function FavoritePlaces(props) {
 
             <View style={styles.fullDimensions}>
 
-                <Button title={'Mapa de lugares felizes'} onPress={() => navigation.navigate(Screens.MAP_SCREEN)} />
+                <Button title={'Mapa de lugares felizes'} onPress={() => navigation.navigate(Screens.HAPY_PLACES)} />
                 <Button title={'Atualizar'} onPress={async () => await searchHappyPlaces()} />
                 <Text>
                     Lugares Favoritos:

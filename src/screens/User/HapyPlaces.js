@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View, Button, Alert, Dimensions, AllertButton } from 'react-native'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
-import * as loginService from '../services/LoginService'
-import * as happlyPlaceService from '../services/HappyPlacaServices'
-import * as favoritePlaceServices from '../services/FavoritePlacesServices'
+import * as loginService from '../../services/LoginService'
+import * as happlyPlaceService from '../../services/HappyPlacaServices'
+import * as favoritePlaceServices from '../../services/FavoritePlacesServices'
 import * as Location from "expo-location"
 import MapView, { Marker } from 'react-native-maps'
 import { useSelector } from 'react-redux'
-import Screens from './Screens'
+import Screens from '../Screens'
 
 
-export default function MapScreen(props) {
+export default function HapyPlaces(props) {
 
   const user = useSelector(store => store.user)
   const { navigation } = props
@@ -103,7 +103,6 @@ export default function MapScreen(props) {
             }
           }
           title={user.email}
-          icon={require("../../assets/my-location-icon.jpg")}
 
         />}
 
@@ -115,7 +114,6 @@ export default function MapScreen(props) {
             longitude: happyPlace.lng
           }}
           title={happyPlace.address}
-          icon={require("../../assets/pet-position.png")}
           onPress={() => Alert.alert(happyPlace.address,
             `Descrição: ${happyPlace.description}\n`,
             [{ text: "OK", onPress: () => "Continue" },

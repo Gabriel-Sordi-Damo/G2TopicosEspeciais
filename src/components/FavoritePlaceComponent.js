@@ -6,10 +6,8 @@ import * as favoritePlaceServices from '../services/FavoritePlacesServices';
 
 
 
-
 export default function FavoritePlace(props) {
-    console.log("lugar favorito")
-    console.log(props)
+
 
 
     return (

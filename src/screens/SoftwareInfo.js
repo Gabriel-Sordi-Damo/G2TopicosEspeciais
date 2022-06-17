@@ -23,12 +23,15 @@ export default function SoftwareInfo(props) {
             </Text>
             <Text>
                 src
-                ---back-end: conexão com o back do Firebase
+                ---firebase: conexão com o back do Firebase
                 ---Components: componentes reaproveitaveis
                 ---Screens: as screens da aplicação
+                ---User: screens acessiveis somente a usuarios logados
+                ---screens acessiveis para qualquer usuario
                 ---Services: servicoes de requisição e pastas do Redux
                 ------actions: acções do redux
                 ------reducers: reducers do redux
+                ---interfaces de conexao dom back end
             </Text>
         </View >
     );

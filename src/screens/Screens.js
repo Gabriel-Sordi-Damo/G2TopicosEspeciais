@@ -4,7 +4,7 @@
 
 export default Screens = {
     "MAIN_MENU": "MAIN_MENU",
-    "MAP_SCREEN": "MAP_SCREEN",
+    "HAPY_PLACES": "HAPY_PLACES",
     "LOGIN": "LOGIN",
     "FAQ": "FAQ",
     "ABOUT": "ABOUT",

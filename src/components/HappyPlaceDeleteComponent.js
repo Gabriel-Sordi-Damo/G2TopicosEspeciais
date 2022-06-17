@@ -4,7 +4,7 @@ import * as petService from '../services/HappyPlacaServices'
 
 import Screens from '../screens/Screens'
 
-export default function Registro(props) {
+export default function HappyPlaceDeleteComponent(props) {
 
     const data = props.dados
 
@@ -21,7 +21,7 @@ export default function Registro(props) {
                     try {
                         await petService.deleteHappyPlace(data.key)
                         Alert.alert("Dados Excluídos com Sucesso")
-                        props.navigation.navigate(Screens.MAP_SCREEN, { atualizar: true })
+                        props.navigation.navigate(Screens.HAPY_PLACES, { atualizar: true })
                     } catch (error) {
                         Alert.alert("Você não possui permissão para excluir esse registro!")
                     }

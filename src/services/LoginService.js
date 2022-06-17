@@ -1,4 +1,4 @@
-import db from "../back-end/firebaseConnect";
+import db from "../firebase/firebaseConnect";
 import {
     getAuth,
     signInWithEmailAndPassword,
