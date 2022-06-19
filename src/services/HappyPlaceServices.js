@@ -3,7 +3,6 @@ import db from "../firebase/firebaseConnect"
 import { collection, addDoc, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore'
 import { searchByAddress } from "./LocationService"
 
-
 export const createHappyPlace = (data, uid) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -22,7 +21,6 @@ export const createHappyPlace = (data, uid) => {
         }
     })
 }
-
 
 export const getHappyPlaceUid = (uid) => {
 
@@ -63,7 +61,6 @@ export const getHappyPlaces = () => {
         }
     })
 }
-
 
 export const deleteHappyPlace = (key) => {
     console.log("Delete", key)

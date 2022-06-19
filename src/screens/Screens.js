@@ -1,7 +1,3 @@
-
-
-
-
 export default Screens = {
     "MAIN_MENU": "MAIN_MENU",
     "HAPY_PLACES": "HAPY_PLACES",

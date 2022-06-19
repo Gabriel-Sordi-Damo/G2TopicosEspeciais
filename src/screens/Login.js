@@ -1,4 +1,5 @@
 import React, { useState, useLayoutEffect } from 'react'
+import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import * as loginService from "../services/LoginService"
@@ -6,7 +7,6 @@ import { CheckBox } from '@rneui/themed';
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useSelector, useDispatch } from 'react-redux';
 import * as UserAction from '../services/actions/user.action'
-
 import Screens from './Screens';
 
 
@@ -66,7 +66,7 @@ export default function Login(props) {
         setRememberme(!rememberMe)
 
         if (!rememberMe) {
-            await AsyncStorage.setItem('email', email)
+            await AsyncStorage.setItem("email", email)
             await AsyncStorage.setItem("password", password)
 
         } else {
@@ -76,81 +76,94 @@ export default function Login(props) {
     }
 
     return (
-        <View style={styles.container}>
-            <Text>Informe suas credenciais</Text>
-            <View style={styles.input}>
-                <TextInput
-                    placeholder='e-mail'
-                    autoCapitalize='none'
-                    keyboardType='email-address'
-                    value={email}
-                    onChangeText={(e) => setEmail(e)}
-
-                />
-            </View>
-            <View style={styles.input}>
-                <TextInput
-                    placeholder='password'
-                    autoCapitalize='none'
-                    secureTextEntry
-                    value={password}
-                    onChangeText={(e) => setPassword(e)}
-                />
-            </View>
-            <View>
-                <CheckBox
-                    center
-                    title="Lembre-me"
-                    checked={rememberMe}
-                    onPress={lembrar}
-                />
-            </View>
-            <View style={styles.linha}>
-                <View style={styles.coluna}>
-                    <Button
-                        title='Entrar'
-                        onPress={efetuarLogin}
+        <LinearGradient
+            colors={["#fc825b", "#f25b50"]}
+            start={[0.2, 0.2]}
+            end={[0.7, 1]}
+            style={styles.background}
+        >
+            <View style={styles.container}>
+                <Text
+                    style={{ fontWeight: "bold", padding: 10 }}
+                >
+                    Informe suas credenciais
+                </Text>
+                <View style={styles.input}>
+                    <TextInput
+                        placeholder='E-mail'
+                        autoCapitalize='none'
+                        keyboardType='email-address'
+                        value={email}
+                        onChangeText={(e) => setEmail(e)}
                     />
                 </View>
-                <View style={styles.coluna}>
-                    <Button
-                        title='Registre-se'
-                        onPress={() => navigation.navigate(Screens.REGISTER_USER)}
+                <View style={styles.input}>
+                    <TextInput
+                        placeholder='Senha'
+                        autoCapitalize='none'
+                        secureTextEntry
+                        value={password}
+                        onChangeText={(e) => setPassword(e)}
                     />
-
                 </View>
-            </View>
-            <StatusBar style="auto" />
-        </View >
+                <View>
+                    <CheckBox
+                        center
+                        title="Lembre-me"
+                        checked={rememberMe}
+                        onPress={lembrar}
+                    />
+                </View>
+                <View style={styles.linha}>
+                    <View style={styles.coluna}>
+                        <Button
+                            title='Entrar'
+                            onPress={efetuarLogin}
+                        />
+                    </View>
+                    <View style={styles.coluna}>
+                        <Button
+                            title='Registrar'
+                            onPress={() => navigation.navigate(Screens.REGISTER_USER)}
+                        />
+
+                    </View>
+                </View>
+                <StatusBar style="auto" />
+            </View >
+        </LinearGradient>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    background: {
+        height: "100%",
+        width: "100%",
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }, input: {
+        alignItems: "center",
+    },
+    container: {
+        marginTop: 20,
+        alignItems: "center",
+        backgroundColor: "#ffffff",
+        width: "90%",
+        borderRadius: 10,
+    },
+    input: {
         borderWidth: 1,
         borderColor: "gray",
-        margin: 5,
-        width: "60%",
-        padding: 3,
-        borderRadius: 5
+        marginBottom: 5,
+        marginTop: 10,
+        width: "80%",
+        borderRadius: 5,
+        padding: 7
     },
     linha: {
-        flexDirection: "row"
+        flexDirection: "row",
+        padding: 5
     },
     coluna: {
         flex: 1,
         marginLeft: 5
     },
-    bottom: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-    },
-
 });

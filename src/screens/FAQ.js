@@ -1,7 +1,6 @@
 import React, { useLayoutEffect } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native';
-
-
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function FAQ(props) {
 
@@ -16,40 +15,39 @@ export default function FAQ(props) {
     }, [])
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.linha}>
-                Ao fazer login no app é possível adicinar um local que te deixa feliz no mapa,
-                junto de uma descrição do porque disso.
-            </Text>
-            <Text>
-                Também é possível favoritar lugares que te deixam feliz que foram adicinados por
-                você ou outras pessoas.
-            </Text>
-
-        </View >
+        <LinearGradient
+            colors={["#f25b50", "#fc825b"]}
+            start={[0.2, 0.2]}
+            end={[0.7, 1]}
+            style={styles.background}
+        >
+            <View style={styles.container}>
+                <View style={styles.linha}>
+                    <Text >
+                        Ao fazer login no app é possível adicionar um local no mapa que te deixa feliz,
+                        junto de uma descrição do porque disso. Também é possível favoritar lugares que foram adicinados por
+                        você ou por outras pessoas.
+                    </Text>
+                </View>
+            </View >
+        </LinearGradient>
     );
 }
 
 const styles = StyleSheet.create({
+    background: {
+        height: "100%",
+        width: "100%",
+    },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }, input: {
-        borderWidth: 1,
-        borderColor: "gray",
-        margin: 5,
-        width: "60%",
-        padding: 3,
-        borderRadius: 5
+        paddingTop: 20,
+        alignItems: "center",
     },
     linha: {
-        flexDirection: "row"
+        backgroundColor: "#ffffff",
+        padding: 10,
+        margin: 10,
+        borderRadius: 10,
     },
-    coluna: {
-        flex: 1,
-        marginLeft: 5
-    }
-
 });

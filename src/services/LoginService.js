@@ -7,10 +7,8 @@ import {
 } from 'firebase/auth'
 
 export const createUser = (email, senha) => {
-
     return new Promise((resolve, reject) => {
         try {
-
             const auth = getAuth();
             createUserWithEmailAndPassword(auth, email, senha)
                 .then((userCredential) => {
@@ -32,11 +30,9 @@ export const createUser = (email, senha) => {
 }
 
 export const login = (email, senha) => {
-
     return new Promise((resolve, reject) => {
         try {
             const auth = getAuth()
-
             signInWithEmailAndPassword(auth, email, senha)
                 .then((data) => {
                     const user = data.user
@@ -48,14 +44,12 @@ export const login = (email, senha) => {
                         reject("Usuário não encontrado!")
                     else
                         reject("Usuário ou senha inválidos!")
-
                 })
         } catch (error) {
             reject(error)
         }
     })
 }
-
 
 export const logoff = () => {
     return new Promise((resolve, reject) => {
@@ -65,6 +59,5 @@ export const logoff = () => {
         }).catch((error) => {
             reject(error)
         });
-
     })
 }

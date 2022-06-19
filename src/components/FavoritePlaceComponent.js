@@ -1,14 +1,8 @@
-import { async } from '@firebase/util';
 import React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native';
 import * as favoritePlaceServices from '../services/FavoritePlacesServices';
 
-
-
-
 export default function FavoritePlace(props) {
-
-
 
     return (
         <View style={styles.container}>
@@ -29,7 +23,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 10
         //justifyContent: 'center',
-    }, input: {
+    },
+    input: {
         borderWidth: 1,
         borderColor: "gray",
         margin: 5,

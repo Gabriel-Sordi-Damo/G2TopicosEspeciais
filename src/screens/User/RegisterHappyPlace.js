@@ -1,16 +1,12 @@
 import React, { useState, useLayoutEffect } from 'react'
+import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from 'expo-status-bar';
 import * as loginService from '../../services/LoginService'
-
 import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList } from 'react-native';
-import * as happlyPlaceService from "../../services/HappyPlacaServices"
+import * as happlyPlaceService from "../../services/HappyPlaceServices"
 import HappyPlaceDeleteComponent from '../../components/HappyPlaceDeleteComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import Screens from '../Screens';
-
-
-
-
 
 export default function RegisterHappyPlace(props) {
 
@@ -20,31 +16,24 @@ export default function RegisterHappyPlace(props) {
     const user = useSelector(store => store.user)
 
     const logoff = async () => {
-
         try {
             await loginService.logoff()
             navigation.replace(Screens.LOGIN)
         } catch (error) {
             Alert.alert(error)
         }
-
     }
 
     useLayoutEffect(() => {
-
-
         navigation.setOptions({
             title: user.email,
             headerTitleAlign: "center",
             headerTitleStyle: {
                 fontSize: 15
             },
-
             headerRight: () => <Button title='Logoff' onPress={logoff} />
         })
-
     }, [])
-
 
     const findHappyPlaces = async () => {
         try {
@@ -52,15 +41,13 @@ export default function RegisterHappyPlace(props) {
             //console.log(dados)
             setHappyPlaces(dados)
         } catch (error) {
-
+            console.log(error);
         }
     }
-
 
     useLayoutEffect(() => {
         findHappyPlaces()
     }, [])
-
 
     const registerPlace = async () => {
         if (form.description && form.address) {
@@ -77,66 +64,81 @@ export default function RegisterHappyPlace(props) {
         }
     }
 
-
     return (
-        <View style={styles.container}>
-            <Text style={{ textAlign: "center" }}>Fale um pouco mais sobre esse local incrivel que você encontrou!</Text>
-            <Text style={{ textAlign: "center" }}>{user.email}</Text>
-            <View style={styles.input}>
-                <TextInput
-                    placeholder='Endereço Completo'
-                    value={form.address}
-                    onChangeText={(value) => setForm(Object.assign({}, form, { address: value }))}
 
-                />
-            </View>
-            <View style={styles.input}>
-                <TextInput
-                    placeholder='O que torna esse local um local feliz?'
-                    value={form.description}
-                    onChangeText={(value) => setForm(Object.assign({}, form, { description: value }))}
-
-                />
-            </View>
-            <View style={styles.linha}>
-                <View style={styles.coluna}>
+        <LinearGradient
+            colors={["#fc825b", "#f25b50"]}
+            start={[0.2, 0.2]}
+            end={[0.7, 1]}
+            style={styles.background}
+        >
+            <View style={styles.container}>
+                <Text style={{ textAlign: "center", color: "#ffffff" }}>Fale um pouco mais sobre esse local incrivel que você encontrou!</Text>
+                {/* <Text style={{ textAlign: "center" }}>{user.email}</Text> */}
+                <View style={styles.input}>
+                    <TextInput
+                        placeholder='Endereço Completo'
+                        placeholderTextColor={"gray"}
+                        value={form.address}
+                        onChangeText={(value) => setForm(Object.assign({}, form, { address: value }))}
+                    />
+                </View>
+                <View style={styles.input}>
+                    <TextInput
+                        placeholder='O que torna esse local um local feliz?'
+                        placeholderTextColor={"gray"}
+                        value={form.description}
+                        onChangeText={(value) => setForm(Object.assign({}, form, { description: value }))}
+                    />
+                </View>
+                <View style={styles.botao}>
                     <Button
                         title='Registrar Local Feliz'
                         onPress={registerPlace}
                     />
                 </View>
-            </View>
-            <StatusBar style="auto" />
-
-            <FlatList
-                data={happyPlaces}
-                renderItem={({ item }) => <HappyPlaceDeleteComponent dados={item} navigation={navigation} />}
-                keyExtractor={item => item.key}
-            />
-        </View >
+                <FlatList
+                    data={happyPlaces}
+                    renderItem={({ item }) => <HappyPlaceDeleteComponent dados={item} navigation={navigation} />}
+                    keyExtractor={item => item.key}
+                />
+                <StatusBar style="auto" />
+            </View >
+        </LinearGradient>
     );
 }
 
 const styles = StyleSheet.create({
+    background: {
+        height: "100%",
+        width: "100%",
+    },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        padding: 10
-        //justifyContent: 'center',
-    }, input: {
+        padding: 20,
+        flexDirection: "column",
+        alignContent: "center"
+    },
+    input: {
         borderWidth: 1,
         borderColor: "gray",
-        margin: 5,
-        width: "99%",
-        padding: 3,
-        borderRadius: 5
+        marginBottom: 5,
+        marginTop: 10,
+        width: "80%",
+        borderRadius: 5,
+        padding: 7,
+        alignSelf: "center",
     },
-    linha: {
-        flexDirection: "row"
-    },
-    coluna: {
-        flex: 1,
-        flexDirection: "row",
-        marginLeft: 5
+    botao: {
+        backgroundColor: "#ffffff",
+        borderRadius: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingRight: 15,
+        paddingLeft: 15,
+        marginTop: 15,
+        marginBottom: 15,
+        width: "70%",
+        alignSelf: "center"
     }
 });

@@ -1,16 +1,13 @@
 import { StyleSheet, Text, View, Button, Alert } from 'react-native'
 import React from 'react'
-import * as petService from '../services/HappyPlacaServices'
+import * as petService from '../services/HappyPlaceServices'
 
 import Screens from '../screens/Screens'
 
 export default function HappyPlaceDeleteComponent(props) {
 
     const data = props.dados
-
     const excluirPet = () => {
-
-
         Alert.alert("Deseja Excluir:", "Esses dados serão apagados para sempre!", [
             {
                 text: "Cancel",
@@ -28,32 +25,24 @@ export default function HappyPlaceDeleteComponent(props) {
                 }
             }
         ])
-
     }
-
 
     return (
         <View style={styles.container}>
             <View style={styles.linha}>
                 <View style={styles.coluna}>
-                    <Text style={styles.campo}>Nome do Pet:</Text>
-                    <Text>{data.address}</Text>
+                    <Text style={{ flex: 2, textTransform: "uppercase", fontWeight: "bold" }}>Nome do Lugar:</Text>
+                    <Text style={{ flex: 3 }}>{data.address}</Text>
                 </View>
             </View>
             <View style={styles.linha}>
                 <View style={styles.coluna}>
-                    <Text style={styles.campo}>Endereço:</Text>
-                    <Text>{data.description}</Text>
+                    <Text style={{ flex: 2, textTransform: "uppercase", fontWeight: "bold" }}>Motivo:</Text>
+                    <Text style={{ flex: 3 }}>{data.description}</Text>
                 </View>
             </View>
-            <View style={styles.linha}>
-                <View style={styles.coluna}>
-                </View>
-                <View style={styles.coluna}>
-                </View>
-                <View style={styles.coluna}>
-                    <Button title='Excluir' color={'red'} onPress={excluirPet} />
-                </View>
+            <View style={styles.botao}>
+                <Button title='Excluir' color={'red'} onPress={excluirPet} />
             </View>
         </View >
     )
@@ -68,14 +57,21 @@ const styles = StyleSheet.create({
         margin: 5
     },
     linha: {
-        flexDirection: "row"
+        flexDirection: "row",
+        backgroundColor: "#ffffff",
+        padding: 10,
+        borderRadius: 10,
+        marginTop: 5
     },
     coluna: {
         flex: 1,
         flexDirection: "row"
     },
-    campo: {
-        width: 90
-    }
-
+    botao: {
+        backgroundColor: "#ffffff",
+        borderRadius: 10,
+        padding: 5,
+        marginTop: 5,
+        width: "50%"
+    },
 })

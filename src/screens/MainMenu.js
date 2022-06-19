@@ -1,7 +1,8 @@
 import React, { useLayoutEffect } from 'react'
-import { StyleSheet, View, FlatList, Button } from 'react-native';
+import { LinearGradient } from "expo-linear-gradient";
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, View, FlatList, Button, Image } from 'react-native';
 import Screens from './Screens';
-
 
 export default function MainMenu(props) {
 
@@ -16,49 +17,68 @@ export default function MainMenu(props) {
     }, [])
 
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={[
-                    {
-                        navigateTo: Screens.LOGIN,
-                        pageName: "Login"
-                    },
-                    {
-                        navigateTo: Screens.SOFTWARE_INFO,
-                        pageName: "Informações do Software"
-                    },
-                    {
-                        navigateTo: Screens.FAQ,
-                        pageName: "FAQ"
-                    },
-                ]}
-                renderItem={({ item }) => <Button
-                    style={styles.item}
-                    onPress={() => navigation.navigate(item.navigateTo)}
-                    title={item.pageName} />}
-            />
-        </View >
+        <LinearGradient
+            colors={["#fc825b", "#f25b50"]}
+            start={[0.2, 0.2]}
+            end={[0.7, 1]}
+            style={styles.background}
+        >
+            <View style={styles.container}>
+                <View style={styles.imagem}>
+                    <Image
+                        source={require("../../assets/logo.png")}
+                        style={{ width: 250, height: 200, resizeMode: 'contain', }} />
+                </View>
+                <FlatList
+                    data={[
+                        {
+                            navigateTo: Screens.LOGIN,
+                            pageName: "Login"
+                        },
+                        {
+                            navigateTo: Screens.SOFTWARE_INFO,
+                            pageName: "Informações do Software"
+                        },
+                        {
+                            navigateTo: Screens.FAQ,
+                            pageName: "FAQ"
+                        },
+                    ]}
+                    renderItem={({ item }) =>
+                        <View style={styles.item}>
+                            <Button
+                                onPress={() => navigation.navigate(item.navigateTo)}
+                                title={item.pageName}
+                            />
+                        </View>
+                    }
+                />
+                <StatusBar style="auto" />
+            </View >
+        </LinearGradient>
     );
 }
 
 const styles = StyleSheet.create({
+    background: {
+        height: "100%",
+        width: "100%",
+    },
     container: {
         flex: 1,
-        paddingTop: 22
+        paddingTop: 20,
+        alignItems: "center",
     },
-    sectionHeader: {
-        paddingTop: 2,
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingBottom: 2,
-        fontSize: 14,
-        fontWeight: 'bold',
-        backgroundColor: 'rgba(247,247,247,1.0)',
+    imagem: {
+        marginBottom: 20
     },
     item: {
-        padding: 10,
-        fontSize: 18,
-        height: 44,
-    },
-
+        backgroundColor: "#ffffff",
+        borderRadius: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingRight: 15,
+        paddingLeft: 15,
+        margin: 5
+    }
 });

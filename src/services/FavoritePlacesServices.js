@@ -2,7 +2,6 @@ import db from "../firebase/firebaseConnect"
 
 import { collection, addDoc, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore'
 
-
 export const createFavoriteHappyPlace = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -13,7 +12,6 @@ export const createFavoriteHappyPlace = (data) => {
         }
     })
 }
-
 
 export const getFavoritePlaceUid = (uid) => {
 
