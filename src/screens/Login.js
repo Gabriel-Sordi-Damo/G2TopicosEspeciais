@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import * as loginService from "../services/LoginService"
 import { CheckBox } from '@rneui/themed';
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as UserAction from '../services/actions/user.action'
 import Screens from './Screens';
 

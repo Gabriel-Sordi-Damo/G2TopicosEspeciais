@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from "firebase/firestore"
 
-//Personalize com as suas chaves de conexão
 const firebaseConfig = {
     apiKey: "AIzaSyB6njzvtZipjwSbuGTOoTR9qClGeiaE9Jw",
     authDomain: "g2topicosespeciais-59f73.firebaseapp.com",

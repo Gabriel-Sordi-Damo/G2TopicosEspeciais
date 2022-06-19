@@ -28,16 +28,13 @@ export default function SoftwareInfo(props) {
                         App feito com Expo. Expo foi escolhido devido as facilidades de uso,
                         levando-se em consideração principalmente os dipositivos móveis dos desenvolvedorers
                         que utilizam o sistema iOS.
-                        src
-                        ---firebase: conexão com o back do Firebase
-                        ---Components: componentes reaproveitaveis
-                        ---Screens: as screens da aplicação
-                        ---User: screens acessiveis somente a usuarios logados
-                        ---screens acessiveis para qualquer usuario
-                        ---Services: servicoes de requisição e pastas do Redux
-                        ------actions: acções do redux
-                        ------reducers: reducers do redux
-                        ---interfaces de conexao dom back end
+                        A pasta principal do projeto é a "src". Dentro dela temos a pasta "components" que contém
+                        os components mais reaproveitáveis do projeto. Na pasta "firebase" temos todos os arquivos
+                        referentes à conexão com o back-end do Firebase. Na paste "screens" temos os arquivos .JS
+                        para cada uma das telas do aplicativo. Dentro dessa pastas, temos também a pasta "User",
+                        que contém os arquivos das telas nas quais ocorrem as principais interações do usuário com
+                        a aplicação. Na pasta "services" temos os arquivos referentes aos serviços de requisição e pastas do Redux.
+                        Na pasta "actions" temos as ações do Redux e na pasta "reducers" temos os reducers do Redux.
                     </Text>
                 </View>
                 <StatusBar style="auto" />
@@ -61,5 +58,6 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         borderRadius: 10,
+        textAlign: 'justify'
     },
 });
