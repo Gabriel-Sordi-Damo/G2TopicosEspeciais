@@ -24,7 +24,7 @@ export default function SoftwareInfo(props) {
         >
             <View style={styles.container}>
                 <View style={styles.linha}>
-                    <Text>
+                    <Text style={{ fontSize: 20 }}>
                         App feito com Expo. Expo foi escolhido devido as facilidades de uso,
                         levando-se em consideração principalmente os dipositivos móveis dos desenvolvedorers
                         que utilizam o sistema iOS.

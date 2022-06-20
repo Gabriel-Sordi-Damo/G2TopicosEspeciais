@@ -93,6 +93,7 @@ export default function Login(props) {
                         placeholder='E-mail'
                         autoCapitalize='none'
                         keyboardType='email-address'
+                        placeholderTextColor={"#858585"}
                         value={email}
                         onChangeText={(e) => setEmail(e)}
                     />
@@ -102,6 +103,7 @@ export default function Login(props) {
                         placeholder='Senha'
                         autoCapitalize='none'
                         secureTextEntry
+                        placeholderTextColor={"#858585"}
                         value={password}
                         onChangeText={(e) => setPassword(e)}
                     />

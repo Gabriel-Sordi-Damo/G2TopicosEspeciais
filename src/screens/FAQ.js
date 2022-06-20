@@ -23,7 +23,7 @@ export default function FAQ(props) {
         >
             <View style={styles.container}>
                 <View style={styles.linha}>
-                    <Text >
+                    <Text style={{ fontSize: 20 }}>
                         Ao fazer login no app é possível adicionar um local no mapa que te deixa feliz,
                         junto de uma descrição do porque disso. Também é possível favoritar lugares que foram adicinados por
                         você ou por outras pessoas.
