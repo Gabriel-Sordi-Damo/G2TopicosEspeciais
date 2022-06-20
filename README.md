@@ -1,4 +1,4 @@
 Integrantes:
 <br>
 Gabriel Sordi Damo  
-Pedro Marcheti
+Pedro Marcheti Casteli
